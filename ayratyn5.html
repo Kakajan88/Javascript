@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="tk">
+<head>
+    <meta charset="UTF-8">
+    <title>Gün hasaplama</title>
+</head>
+<body>
+
+<h2>Iki senäniň arasyndaky gün sany</h2>
+
+<label>Başlangyç sene:</label>
+<input type="date" id="date1"> <br><br>
+
+<label>Gutarýan sene:</label>
+<input type="date" id="date2"> <br><br>
+
+<button id="calcBtn">Hasapla</button>
+
+<p>Netije: <span id="result"></span></p>
+
+<script>
+ document.getElementById("calcBtn").addEventListener("click", function() {
+    
+    const d1 = document.getElementById("date1").value;
+    const d2 = document.getElementById("date2").value;
+
+    if (d1 === "" || d2 === "") {
+        document.getElementById("result").textContent = "Ilki iki senäni hem saýla!";
+        return;
+    }
+
+    // Date obýektine öwürýäris
+    const date1 = new Date(d1);
+    const date2 = new Date(d2);
+
+    // Millisekund tapawudy
+    const diffMs = date2 - date1;
+
+    // Millisekundy gün sanlaryna öwürmek
+    const diffDays = diffMs / (1000 * 60 * 60 * 24);
+
+    // Netije
+    document.getElementById("result").textContent = d1 + " bilen " + d2 +" arasy  " +  diffDays + " gün";
+})
+</script>
+
+</body>
+</html>
+</body>
+</html>

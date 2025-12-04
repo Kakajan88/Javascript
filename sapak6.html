@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        getrememberMe();
+        function setRememberMe(remember){
+            localStorage.setItem("remember", JSON.stringify(Boolean(remember)));
+
+        }
+        function getrememberMe(){
+            return JSON.parse(localStorage.getItem("remember") ?? "false");
+        }
+
+        // if / else if / else
+
+        function saveData(form){
+            const ad=form.ad.value.trim();
+            if(ad==="")
+            return errorData("Ad bos bolmaly dal");
+            if(ad.length<3)
+            return errorData("Ad ady gysga");
+         successData("Maglumat Gosuldy");
+        }
+
+        const rol="admin";
+        switch(rol){
+            case "superAdmin": case "admin": yetkiBer(true); break;
+            case "user" : yetkiBer(false); break;
+            default: yalnysRol();
+            console.log(rol);
+        }
+    </script>
+</body>
+</html>

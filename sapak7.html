@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+       for (const el of document.querySelectorAll(".item")){
+         el.classList.add('tayyar.');
+       } 
+       const arr= ["a", "b", "c"];
+       for (const [i, val] of arr.entries())
+       console.log(i,val);
+
+
+       const o= Object.create({miras: 1});
+       o.ozi= 2;
+       for (const k in o){
+         if(Object.hasOwn(o,k)){
+            console.log(o,k[k]);
+         }
+       }
+    </script>
+</body>
+</html>

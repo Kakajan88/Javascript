@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-icons.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container-sm">
+        <div class="row">
+    <input type="text" id="input1" class="form control mb-2">
+    <input type="text" id="input2" class="form control">
+    <div class="d-flex mb-2">
+    <button class="btn btn-success " id="plus">+</button>
+    <button class="btn btn-primary" id="minus">-</button>
+    <button class="btn btn-danger" id="submit">Jemi</button>
+    </div>
+    <div class="text center" id="result">R</div>
+    </div>
+    </div>
+    
+
+    <script>
+       const input1 = document.getElementById("input1");
+       const input2 = document.getElementById("input2");
+       const plus = document.getElementById("plus");
+       const minus = document.getElementById("minus");
+       const result = document.getElementById("result");
+       const submit = document.getElementById("submit");
+       let action = "+";
+
+      plus.onclick= function(){
+        action = "+"
+      }
+
+      minus.onclick = function(){
+      action = "-"
+      }
+
+       submit.onclick= function(){
+        if(action == "+"){
+            const sum = Number(input1.value) + Number(input2.value)
+            if(sum<0){
+                result.style.color = "red"
+            }else{
+                result.style.color = "green"
+            }
+            result.textContent = sum
+        } else if(action == "-"){
+            const sum = Number(input1.value) - Number(input2.value)
+            if(sum<0){
+                result.style.color = "red"
+            }else{
+                result.style.color = "green"
+            }
+            result.textContent = sum
+       }
+    }
+
+    
+
+
+    </script>
+    <script src="bootstrap.bundle.min.js"></script>
+</body>
+</html>

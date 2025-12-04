@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function dis(){
+            const gizlin= 42;
+            function ic() {return gizlin;}
+            return ic();
+        }
+        console.log(dis());
+
+        //console.log(s)
+        //var s= 10;
+
+        console.log(topla(2,3));
+        function topla(x,y){return x+y;}
+
+        try {
+            console(kopelt(5,10));
+        } catch (error) {
+            console.log(error.message);
+        }
+        const kopelt= function(x,y){return x*y};
+
+        function f(){return this;}
+        const o={ad:"k",f};
+        console.log(o.f()===o);
+
+        const h=o.f.bind(o);
+        console.log(h()===o);
+
+
+
+        const mod={
+            sana:0, gos(){
+                setTimwout(function(){
+                    mod.sana++; 
+                },0);
+                setTimeout(()=> {
+                    this.sana++;
+                },0);
+            }
+        };
+        function sanFactory(baslangyc=0){
+            let dowamEt= baslangyc;
+            return{
+                artdyr(){dowamEt++; return dowamEt;},
+                toplamy(){return dowamEt;}
+            };
+        }
+        const q=sanFactory(5);
+        console.log(q.toplamy());
+        console.log(q.artdyr());
+
+        const Toast= (()=> {
+            const root= document.body;
+            function create(msg){
+                const el= createElement("div");
+                el.className= "toast"; el.textContent = msg;
+                root.append(el); setTimeout(()=>el.remove(), 1000);
+            }
+            return {show:create};
+        })
+        Toast.show("Maglumat gosuldy");
+
+        const view = {
+            el: document.querySelector("#btn"), _
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sapak 12</title>
+</head>
+<body>
+    
+    <script>
+        function saanfactory(bas=0){
+            let n=bas;
+            return{
+                arttyr(){return ++n;},
+                arassaLazero(){n+0},
+                valueData(){return n}
+            };
+        }
+        const res = saanFactory(5);
+        console.log(res.valueData());
+        console.log(res.arttyr());
+
+        function once(fn){
+            let done= false, val;
+            return (...args)=>done? val : (done=true, val= fn(...args));
+        }
+        const dineBirGezek= once(()=>console.log("Dine Bir Gezek!!"));
+        dineBirGezek(); dineBirGezek();
+
+        function memorize(gelenData){
+            const cache= new Map();
+            return(...args)=>{
+                const key= JSON.stringify(args);
+                if (cache.has(key)) return cache.get(key);
+                const val= gelenData (...args);
+                cache.set(key,val);
+                return val;
+            };
+        }
+
+        const barla= n=>{return n*n};
+        const sonTest=memorize(barla);
+    </script>
+</body>
+</html>

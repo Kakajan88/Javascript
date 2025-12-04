@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sapak4</title>
+</head>
+<body>
+    
+   <input type="text" id="price" placeholder="Mysal ucin 155.50">
+   <input type="text" id="tax" value="20">
+   <button id="hasapla">Hasapla</button>
+   <pre id="resultData"></pre>
+
+
+   <script>
+       const el=(s)=> document.querySelector(s);
+       const toNum=(s)=>{
+          const n=toNumberString(s);
+          return Number.isFinite(n) ? n : NaN;
+       }
+
+       function toNumberString(a){
+         if(typeof a!=="string") return Number(a);
+         const t=a.trim().replace(",",".");
+         return t=="" ? NaN : Number(a);
+       }
+
+       el("#hasapla").addEventListener("click", ()=>{
+         const price=toNum(el ("#price").value);
+         const tax=toNum(el("#tax").value);
+         if (!Number.isFinite(price) || !Number.isFinite(tax)){
+          el("#resulData").textContent="Gecerli San Yzyn!" 
+         }
+         const taxSummery=price * tax/100;
+         const total=price+taxSummery;
+          el ("#resultData").textContent= `Nalok ${taxSummery.toFixed(2)} | Toplam: ${total.toFixed(2)}`;
+       });
+
+
+
+        var v = 0;
+        function toBool(v){
+            if(typeof v ==="boolean") return v;
+            if(typeof v!=="string") return Boolean(v);
+            const t=v.trim().toLowerCase();
+            return t ==="true" || t==="1" || t==="on" || t==="yes";
+       }
+
+
+       const toplam = {value:10, [Symbol.toPrimitive](hint){
+          return hint==="string" ? `Toplam:${this.value}`: this.value;
+       }
+    };
+
+    console.log(toplam + 6);
+    console.log(String(toplam))
+   </script>
+</body>
+</html>

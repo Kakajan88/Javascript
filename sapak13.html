@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const m= new Map();
+        m.set("ad", "Kakajan");
+        m.set(37, "Jogap");
+        const u= {id:50}; 
+        m.set(u, {online: true}); 
+
+        m.get("ad"); //Guwanc
+        m.has(37); //true
+        m.delete(30); //false
+
+        //m.clear();
+
+        for(const [k, v] of m) console.log(k,v);
+        console.log(m);
+        //Hacan Map we Hacan Object ulanmaly
+
+        //Mysal
+        // Json bilen Map / Set etme (localstorage we s.m)
+        // Map - Json
+        const json = JSON.stringify([...m]);
+        const m2= new Map(JSON.parse(json));
+        
+        // Set - JSON
+        const s=new Set([1,2,3]);
+        const sjson= JSON.stringify([...s]); ///[1,2,3]
+
+        const s2=new Set(JSON.parse(sjson));
+
+    </script>
+</body>
+</html>

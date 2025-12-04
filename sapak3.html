@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Javascript</title>
+</head>
+<body>
+    <div class="country">
+    <h1>Yurtlaryn kodlary</h1>
+    <input type="text" id="yurtlar" placeholder="Yurdun adyny yaz">
+    <button onclick="showCode()">Kody gor</button>
+    <p id="netije"></p>
+    </div>
+
+    <script>
+        function showCode() {
+            const yurt = document.getElementById("yurtlar").value.toLowerCase().trim();
+            let  kod;
+            if(yurt === "turkmenistan"){
+                kod = "+993"
+            }else if (yurt === "turkiye"){
+                kod = "+90"
+            }else if(yurt === "russia"){
+                kod = "+7"
+            }else {
+                kod = "Bular yaly yurt yok"
+            }
+
+            document.getElementById("netije").textContent =  kod;
+        }
+
+       // const san=90;
+       //  const bal= san>=85 ? "Has gowy" : san>=70 ? "Gowy" : san>=50 ? "Kanagatnarly" : "Yaman";
+       // console.log(bal)
+
+        const ball=90;
+        if (ball>85 || ball==85){
+            console.log("Has gowy")
+        }
+        else if(ball>70 || ball==70){
+           console.log("Gowy") 
+        }
+        else if(ball>50 || ball==50){
+           console.log("Kanagatlanarly") 
+        }
+        else {
+            console.log("Yaman")
+        }
+    </script>
+
+
+     <div class="country2">
+        <h2>Materiklar</h2>
+        <input type="text" id="input" placeholder="Materik girizin">
+        <button onclick="showCodde()">Bas</button>
+        <p id = "net"></p>
+     </div>
+    <script>
+        const continents = {"yewropa": ["Germaniya", "Italia", "Ukraina", "Fransiya"],
+             "aziya": ["Turkmenistan", "Kazakstan", "India", "Uzbekistan"],
+             "yewraziya": ["Russia", "Turkiye"],
+
+             "amerika": ["ABD", "Kanada"]
+        };
+        function showCodde(){
+            const continent =  document.getElementById("input").value.toLowerCase().trim();
+            const countries = continents[continent];
+            const net = document.getElementById("net");
+            if(countries){
+               net.textContent = `${continent.toUpperCase()} : ${countries.join(",")}`;
+            } else {
+                net.textContent = "Bular yaly materik yok"
+            }
+        }
+    </script>
+</body>
+</html>

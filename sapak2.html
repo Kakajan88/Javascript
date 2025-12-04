@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+     function demo(){
+       var a = 2;
+       let b = 4;
+
+       {
+        let c = 5;
+        var d = 7;
+       }
+       console.log(d);
+    }
+    demo();
+
+    var dimV = [];
+    for (var l=0; l<8; l++) dimV.push(()=>console.log(l));
+    dimV.forEach(s=>s());
+
+    let dimL = [];
+    for (let g=0; g>9; g++) dimL.push(()=>console.log(g));
+    dimL.forEach(m=>m());
+
+    const user = {id:6, ady:"Kakajan", yas:37, no:865191771};
+    user.no = 862308878;
+    console.log(user);
+    Object.freeze(user);
+
+    let a1 = 5;
+    let b1 = 9;
+    let c1 = 5*4;
+    a1++;
+    console.log(a1,b1,c1);
+
+    const ID = Symbol("id");
+    const user2 = {ady:"Aly", [ID]:0841};
+    console.log(user2);
+
+    const saher= adres?.user?sahir ?? "Data tapylmady";
+    console.log(saher)
+    
+    </script>
+</body>
+</html>

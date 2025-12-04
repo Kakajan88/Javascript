@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wagtar</title>
+</head>
+<body>
+    <h2>Yurtlaryn hazirki wagty</h2>
+    <button onclick="wagt()">Wagty gorkez</button>
+
+    <p>Turkmenistan: <span id="tm"></span></p>
+    <p>Turkiye: <span id="tr"></span></p>
+    <p>ABS: <span id="us"></span></p>
+    <p>Yaponiya: <span id="jp"></span></p>
+    <p>Russiya: <span id="ru"></span></p>
+    
+    <script>
+        function wagt(){
+            const now = new Date();
+
+            document.getElementById("tm").textContent = now.toLocaleDateString("tk-TM",{
+                hour:"2-digit", minute:"2-digit", second:"2-digit",
+                timeZone:"Asia/Ashgabat"
+            });
+
+            document.getElementById("tr").textContent = now.toLocaleDateString("tr-TR",{
+                hour:"2-digit", minute:"2-digit", second:"2-digit",
+                timeZone:"Europe/Istanbul"
+            });
+
+            document.getElementById("us").textContent = now.toLocaleDateString("en-US",{
+                hour:"2-digit", minute:"2-digit", second:"2-digit",
+                timeZone:"America/New_York"
+            });
+
+            document.getElementById("jp").textContent = now.toLocaleDateString("jp-JA",{
+                hour:"2-digit", minute:"2-digit", second:"2-digit",
+                timeZone:"Asia/Tokyo"
+            });
+
+            document.getElementById("ru").textContent = now.toLocaleDateString("ru-RU",{
+                hour:"2-digit", minute:"2-digit", second:"2-digit",
+                timeZone:"Europe/Moscow"
+            });
+        }
+         
+         setInterval(wagt,1000);
+    </script>
+</body>
+</html>

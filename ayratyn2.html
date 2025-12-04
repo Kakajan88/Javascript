@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products with map</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container py-5">
+
+  <h2 class="mb-4">Harytlar (map bilen döredilen)</h2>
+
+  <div class="row" id="productList"></div>
+
+</div>
+
+<script>
+  const products = [
+    {
+      name: "Programmist Noutbuk",
+      price: 4500,
+     
+    },
+    {
+      name: "Wireless Naushnik",
+      price: 400,
+      
+    },
+    {
+      name: "27'' Monitor",
+      price: 5500,
+      
+    },
+     {
+      name: "27'' Monitor",
+      price: 5500,
+      
+    }
+  ];
+
+  const box = document.getElementById("productList");
+
+  const html = products.map(item => {
+    return `
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+         
+           <div class="card-body">
+            <h5 class="card-title">${item.name}</h5>
+            <p class="card-text text-muted">${item.price} TMT</p>
+
+            <button class="btn btn-primary w-100">Sebede Goş</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  box.innerHTML = html;
+ 
+  const now = new Date();
+  console.log(now)
+</script>
+
+</body>
+</html>

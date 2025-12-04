@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //declarayion
+        function topla(a,b){
+            return a+b;
+        }
+        //expression
+        const kopelt=function(a,b){
+            return a*b;
+        };
+        //Ulanys gornusi
+        console.log(topla(2,3));
+        //ok funksiyan (arrow function)
+
+        const ikigaty= n=>n *2;
+        const toplaa=(a,b)=>{return a+b}; //Sebabi bu blokgowdesi (a,b), Return set
+
+        //Parametr : default rest parcalara ayyrma
+        function ad(ady="Kakajan"){
+            return `Salam ${ady}`
+        }
+        console.log(ad("Kakajan"));
+        //avg
+        function avgData(...sanlar){
+            return sanlar.reduce((t,n)=>t+n,0)/sanlar.length;
+        }
+        //named parans
+        function connectorUrl({host="localhost", port=8443}){
+            return `tcp://${host}:${port}`;
+        }
+        console.log(connectorUrl("localhost",8443));
+
+        //donus maglumaty ir bolmasy ucin ulanylar
+        //return yok bolsa undefined
+
+        function validateEmail(f){
+            if(!f) return false;
+            const s= String(f).toLowerCase();
+            return s.includes("@")
+        }
+        console.log(validateEmail("Babaguly9@gmail.com"));
+
+        //this hereketi normal funksiya vs arrow
+        const o= {ad:"Kerim", yaz(){console.log(this.ad)}} //normal funksiya this o
+        o.yaz(); //guty
+
+        const btn= document.createElement("button"); //Islem yarat. Button
+        btn.textContent="Bas"; //btn icerisine yazg yaz
+        document.body.append(btn); //bu yazgyny buton ocerisine yerlestir
+
+        //arrow
+        const mod= {san:0, 
+            //arrow oz thisini yaratmaz.
+            artdyr: ()=>{/*barde this garasdygy yaly mod bolmaz*/},
+            artdyrLoop(){this.san++;}
+        };
+        btn.addEventListener("click", mod.artdyrLoop.bind(mod));
+        console.log(mod);
+
+        //argument vs rest
+        function kone(){
+            console.log(arguments.length); //bu aslynda arrow menzesi yone arrow dal
+        }
+        //Rest ulanyldy
+        function yaze(...args){
+            console.log(args.map(x=>x));
+        }
+
+        //erro gornusleri yontem
+        function parsJSON(s, fallback=null){
+            try{return JSON.parse(s);}
+            catch{return fallback;}
+        };
+
+    </script>
+</body>
+</html>

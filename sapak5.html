@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="card" data-san="0" data-invoice="true"></div>
+
+    <script>
+        const p= new URLSearchParams(Location.search);
+        const page= Number(p.get("page") ?? 1);
+        const active= Boolean(p.get("active"));
+        const q = p.get("q") ?? "";
+        console.log(q)
+
+        const MyData = {
+            sepet:[{id:1, ururnSany:50}], toplam:520
+        };
+        localStorage.setItem("app", JSON.stringify(MyData));
+
+        const saved= JSON.parse(localStorage.getItem("app") ?? {});
+        console.log(Array.isArray(saved.sepet));
+
+        const card= document.querySelector("#card");
+        const san= Number(card.dataset.san);
+        const invoice= Boolean(card.dataset.invoice);
+
+        function pagination (sahypaParam){
+            const sahypa= (sahypaParam ?? 1);
+            return sahypa;
+
+        }
+
+        const s= "1.2130";
+        const parsMoney = (s)=>{
+            const t= s.replace(/[\d,.-]/g,"").replace(",",".");
+            return Number(t);
+            console.log(t);
+        }
+         function parseCurrency(b){
+           const arassala= b.replace(/[\d,.-]/g,"").replace(",",".");
+           const gelenSan= Number(arassala);
+           console.log("Uytgedilen format:", gelenSan);
+           return gelenSan
+         }
+         const result=parseCurrency("1.2355");
+         console.log(result);
+
+    </script>
+</body>
+</html>
