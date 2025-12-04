@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+     <input type="text" id="search" placeholder="Gozle...">
+
+     <ul id="list">
+        <li>Turkmenistan</li>
+        <li>Turkiye</li>
+        <li>Belgiya</li>
+        <li>Germaniya</li>
+        <li>Russiya</li>
+        <li>United Stated</li>
+        <li>Fransiya</li>
+        <li>Yaponiya</li>
+        <li>Daniya</li>
+        <li>Italiya</li>
+     </ul>
+
+     <script>
+        const search= document.getElementById("search");
+        const countries= document.querySelectorAll("#list li");
+       
+        search.addEventListener("input", () => {
+            const text= search.value.toLowerCase();
+            for (const country of countries) {
+                const name= country.textContent.toLowerCase();
+
+                if(name.includes(text)) { 
+                    country.style.display = "list-item";
+
+                } else {
+                    country.style.display= "none";
+                }
+            }
+        });
+     </script>
+</body>
+</html>

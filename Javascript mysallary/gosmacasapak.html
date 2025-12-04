@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+
+    <script>
+       function calculate(x,b,d){
+        if(d === "+"){
+            return x+b;
+        } else if ( d === "-"){
+            return x-b;
+        } else if( d === "*" ){
+            return x*b;
+        } else if( d === "/"){
+            return x/b;
+        } else {
+            return "Beyle hasaplama yok"
+        }
+       }
+
+       let num1 = Number(prompt("Birinji sany yazyn"));
+       let num2 = Number(prompt("Ikinji sany yazyn"));
+       let operation = prompt("Islendik Hasaplamany girizin (+, -, *, /)");
+
+      let result = calculate(num1, num2, operation);
+      console.log("Jemi:" + result);
+      alert("Jemi:" + result);
+       
+    </script>
+</body>
+</html>

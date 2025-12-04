@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <label for=""><input type="checkbox" id="hemmesi">Hemmesini sayla</label><br>
+   <label for=""><input type="checkbox" class="item">A</label>
+   <label for=""><input type="checkbox" class="item">B</label>
+   <label for=""><input type="checkbox" class="item">C</label>
+
+   <p id="san">Saylanan: 0/3</p>
+
+   <script>
+      const hemmesi= document.getElementById("hemmesi");
+      const items= document.querySelectorAll(".item");
+      const san= document.getElementById("san");
+
+      function uytgeme(){
+        let selected= 0;
+        for (const item of items ){
+            if (item.checked) selected++;
+        }
+        san.textContent= `Saylanan: ${selected}/${items.length}`;
+      }
+
+      hemmesi.addEventListener("change", ()=> {
+        for (const item of items) {
+            item.checked = hemmesi.checked;
+        }
+        uytgeme()
+      });
+
+        for (const item of items) {
+            item.addEventListener("change", () => {
+                uytgeme();
+       
+        let hemme= true;
+        for (const i of items){
+            if (!i.checked) {
+                hemme= false;
+                break;
+            }
+        }
+         hemmesi.checked= hemme;
+    });
+}
+
+   </script>
+
+</body>
+</html>

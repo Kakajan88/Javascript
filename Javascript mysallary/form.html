@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-icons.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <title>Form</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title mb-4"Login></h4>
+                <form action="" id="user" novalidate>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Adynyz</label>
+                        <input type="text" class="form-control" id="name" required>
+                        <div class="invalid-feedback">Adynyzy girizin</div>
+                    </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email adresiniz</label>
+                            <input type="email" class="form-control" id="email" required>
+                            <div class="invalid-feedback">Dogry email girizin</div>
+                        </div>
+                         <div class="mb-3">
+                            <label for="password" class="form-label">Parol</label>
+                            <input type="password" class="form-control" id="password" minlength="8" required>
+                            <div class="invalid-feedback">Parol azyndan 8 harp bolmaly</div>
+                         </div>
+                         <button type="submit" class="btn btn-primary w-100">Ugrat</button>
+                 </form>
+                 <div id="result" class="alert mt-4 d-none"></div>
+            </div>
+        </div>
+    </div>
+    <script src="bootstrap.bundle.min.js"></script>
+
+    <script>
+        const form= document.getElementById("user");
+        const result= document.getElementById("result");
+
+        form.addEventListener("submit", (e) => {e.preventDefault()
+            result.classList.add("d-none");
+            try{
+                if(!form.checkValidity()){
+                    form.classList.add("was-validated");
+                    throw new Error("Forma maglumatlary dogry dal");
+                }
+                const name= document.getElementById("name").value.trim();
+                const email= document.getElementById("email").value.trim();
+                const password= document.getElementById("password").value.trim();
+
+                if(password.length<8){
+                    throw new Error("Parol azyndan 8 harp bolmaly");
+                }
+                result.textContent= `Form ustunlikli ugradylan`;
+                result.className= "alert alert-succes mt-4";
+                result.classList.remove("d-none");
+                form.reset();
+                form.classList.remove("was-validated");
+            }catch (error) {
+                result.textContent= error.message;
+                result.className= "alert alert-danger mt-4"
+                result.classList.remove("d-none");
+            }
+        });
+    </script>
+</body>
+</html>

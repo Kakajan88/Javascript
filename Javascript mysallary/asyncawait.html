@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <button id="load">Maglumat al</button>
+    <p id="netije"></p>
+    <script>
+    const btn = document.getElementById("load");
+      const netije = document.getElementById("netije");
+
+      btn,addEventListener("click", async()=>{
+        netije.textContent = "Yuklenyar....";
+        try{
+            const ur = await fetch("https://google.com/users");
+            const data = await ur.json();
+            netije.textContent = JSON.stringify(data,null,2);
+        }
+        catch (error) {
+            netije.textContent = "Yalnyslyk boldy: " + error;
+        }
+      });
+      </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    text-align: center;
+
+}
+
+h1{
+    padding: 20px;
+    margin: 30px;
+}
+
+input{
+    padding: 10px;
+    font-size: 12px;
+    width: 150px;
+    border-radius: 8px;
+
+}
+
+button{
+    padding: 10px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+p{
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px;
+
+}
+h2{
+    padding: 20px;
+    margin-top: 30px;
+}
+.country{
+    margin: 20px;
+    padding: 20px;
+}
+.country2{
+    margin: 20px;
+    padding: 10px;
+}
