@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form-box">
+        <h2>Registrasiya</h2>
+
+        <form action="" id="registerForm">
+
+            <select name="" id="region">
+                <option value="">Welayaty sayla</option>
+            </select><br><br>
+            <select name="" id="city">
+                <option value="">Saheri sayla</option>
+            </select><br><br>
+        </form>
+    </div>
+    <div id="result"></div>
+
+    <script>
+        const citySelect = document.getElementById("region");
+        const districtSelect = document.getElementById("city");
+        const result = document.getElementById("result");
+
+        let cities = [];
+        let districts = [];
+        async function loadCities() {
+            try{
+                const res = await fetch("https://rest.webigem.com.tr/api/v1/Cities");
+                if(!res.ok) throw new Error("Cities load error");
+
+                const json = await res.json();
+                cities = json.data.categoryList;
+
+                cities.forEach(c => {
+                    const opt = document.createElement("option");
+                    opt.value = c.cityId;
+                    opt.textContent = c.city;
+                    citySelect.appendChild(opt);
+                });
+            }catch (er) {
+                console.error(er);
+            }
+        }
+        
+        citySelect.addEventListener("change", async function () {
+            const cityId = this.value;
+            districtSelect.innerHTML = "";
+            districtSelect.disabled = true;
+            result.textContent = "";
+
+            if(!cityId) return;
+            try{
+                const res = await fetch(`https://rest.webigem.com.tr/api/v1/Districts?cityId=${cityId}`);
+                if(!res.ok) throw new Error("district load error");
+                const json = await res.json();
+                districts = json.data || [];
+                
+                districtSelect.innerHTML = `<option value="">Saheri sayla</option>`
+                districts.forEach(d => {
+                    const opt = document.createElement("option");
+                    opt.value = d.districtId;
+                    opt.textContent = d.district;
+                    districtSelect.appendChild(opt);
+                });
+                city.disabled = false;
+
+            }catch (er) {console.error(er)};
+        });
+
+        districtSelect.addEventListener("change", async function(){
+            const districtId = this.value;
+            if(!districtId) return;
+
+            const city = cities.find(c => c.cityId==citySelect.value);
+            const district = districts.find(d => d.districtId==districtId);
+
+            const output = {welayatId: city.cityId,
+                            welayat: city.city,
+                            etrapId: district.districtId,
+                            etrap: district.district
+            };
+            result.textContent = JSON.stringify(output,null,2);
+        });
+        loadCities();
+    </script>
+</body>
+</html>

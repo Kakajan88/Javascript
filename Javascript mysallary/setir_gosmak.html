@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-icons.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body class="bg-dark text-light">
+     <div class="container w-50 pt-5">
+        <h1>Zametka</h1>
+        <input type="text" class="form-control mb-2" placeholder="Yazyn..." id="title">
+        <button class="btn btn-outline-info w-100 mb-2" id="create">Goş</button>
+
+        <ul class="list-group list-group-flush" id="list">
+          <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>Ady</span>
+                <span>
+                   <span class="btn btn-small btn-success">&check;</span>
+                   <span class="btn btn-small btn-danger">&times;</span>
+                </span>
+            </li> -->
+        </ul>
+
+        <script>
+            const inputElement = document.getElementById("title");
+            const createBtn = document.getElementById("create");
+             const listElement = document.getElementById("list");
+            
+             createBtn.addEventListener("click", ()=>{
+                if(inputElement.value.length===0){
+                    return
+                }
+                listElement.insertAdjacentHTML(`beforeend`,`<li class="list-group-item d-flex 
+                justify-content-between align-items-center">
+                <span>${inputElement.value}</span>
+                <span>
+                   <span class="btn btn-small btn-success">&check;</span>
+                   <span class="btn btn-small btn-danger">&times;</span>
+                </span>
+            </li>`)
+             inputElement.value = ""
+             });
+             
+            
+        </script>
+        <script src="bootstrap.bundle.min.js"></script>
+     </div>
+</body>
+</html>
