@@ -15,12 +15,15 @@
       btn,addEventListener("click", async()=>{
         netije.textContent = "Yuklenyar....";
         try{
-            const ur = await fetch("https://google.com/users");
+            const ur = await fetch("https://jsonplaceholder.typicode.com/users");
+            if(!ur.ok){
+              throw new Error("Server yalnyslyk berdi! Status:" + ur.status);
+            }
             const data = await ur.json();
-            netije.textContent = JSON.stringify(data,null,2);
+            netije.textContent = JSON.stringify(data, null, 2);
         }
-        catch (error) {
-            netije.textContent = "Yalnyslyk boldy: " + error;
+        catch (err) {
+            netije.textContent = "Yalnyslyk boldy: " + err;
         }
       });
       </script>

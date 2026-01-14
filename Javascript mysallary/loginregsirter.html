@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tk">
+<head>
+<meta charset="UTF-8">
+<title>Registrasiya</title>
+
+<style>
+body { font-family: Arial; background:#f2f2f2; padding:30px; }
+.box {
+  background:#fff;
+  max-width:480px;
+  margin:auto;
+  padding:60px;
+  border-radius:8px;
+}
+input, select, button {
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+}
+button { cursor:pointer; 
+         background: blue;
+         color:azure;
+         border-radius: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Registrasiýa</h2>
+
+  <form id="registerForm">
+    <input name="Name" placeholder="Ad" required>
+    <input name="Surname" placeholder="Familiýa" required>
+    <input name="Email" type="email" placeholder="Email" required>
+    <input name="Tel" placeholder="Telefon" required>
+    <input name="Password" type="password" placeholder="Parol" required>
+
+    <select name="Sex">
+      <option value="Erkek">Erkek</option>
+      <option value="Kadin">Kadin</option>
+    </select>
+
+    <select name="BusinessAccount">
+      <option value="false">Şahsy</option>
+      <option value="true">Biznes</option>
+    </select>
+    <input name="Agency" placeholder="Agency" required>
+
+    <button type="submit">Registrasiýa et</button>
+  </form>
+
+  <pre id="result"></pre>
+</div>
+
+<script>
+document.getElementById("registerForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+
+  try {
+    const response = await fetch(
+      "https://rest.webigem.com.tr/api/v2/CreateAccountCustomer",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const data = await response.json();
+    document.getElementById("result").textContent =
+      JSON.stringify(data, null, 2);
+
+  } catch (err) {
+    document.getElementById("result").textContent =
+      "Server bilen baglanysyk yok";
+  }
+});
+</script>
+
+</body>
+</html>

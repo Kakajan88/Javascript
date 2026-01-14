@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="tk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Müşderi Girişi</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 24px; }
+    .box { max-width: 420px; border: 1px solid #ddd; padding: 16px; border-radius: 8px; }
+    label { display: block; margin-top: 12px; font-weight: 600; }
+    input { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid #ccc; border-radius: 6px; }
+    button { margin-top: 14px; padding: 10px 12px; border: 0; border-radius: 6px; cursor: pointer; }
+    .row { display: flex; gap: 10px; align-items: center; margin-top: 14px; }
+    .row button { flex: 1; }
+    pre { margin-top: 14px; background: #f6f6f6; padding: 12px; border-radius: 8px; overflow: auto; }
+    .muted { color: #666; font-size: 12px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Müşderi Girişi</h2>
+
+    <form id="loginForm">
+      <label for="username">E-poçta</label>
+      <input id="username" name="username" type="email" placeholder="mysal@mail.com" required />
+
+      <label for="password">Açarsöz</label>
+      <input id="password" name="password" type="password" placeholder="••••••" required />
+
+      <label for="ipAddress">IP salgysy (awtomatik)</label>
+      <input id="ipAddress" name="ipAddress" type="text" placeholder="IP alnyp dur..." />
+
+      <div class="row">
+        <button type="submit">Giriş et</button>
+        <button type="button" id="btnClear">Arassala</button>
+      </div>
+
+      <div class="muted" id="ipInfo">IP alnyp dur...</div>
+      <div class="muted">
+        Bellik: Eger CORS sebäpli goýbermese, bu faýly lokal web server bilen işlediň (VS Code Live Server ýaly).
+      </div>
+    </form>
+
+    <pre id="result">Netije şu ýerde görner...</pre>
+  </div>
+
+<script>
+  const API_URL = "https://rest.webigem.com.tr/api/v2/CustomerLogin";
+  const IP_SERVICE_URL = "https://api.ipify.org?format=json";
+
+  const form = document.getElementById("loginForm");
+  const resultEl = document.getElementById("result");
+  const ipEl = document.getElementById("ipAddress");
+  const ipInfo = document.getElementById("ipInfo");
+  const btnClear = document.getElementById("btnClear");
+
+  async function autoFillIp() {
+    ipInfo.textContent = "IP alnyp dur...";
+    ipEl.value = "";
+
+    try {
+      const r = await fetch(IP_SERVICE_URL);
+      const j = await r.json();
+
+      if (j && j.ip) {
+        ipEl.value = j.ip;
+        ipInfo.textContent = "IP awtomatik dolduryldy: " + j.ip;
+      } else {
+        ipInfo.textContent = "IP adres tapylmady.";
+      }
+    } catch (error) {
+      ipInfo.textContent = "IP alnyp bilinmedi: " + (error?.message || error);
+    }
+  }
+
+  // Sahypa açylanda IP-ni awtomatik al
+  autoFillIp();
+
+  btnClear.addEventListener("click", () => {
+    form.reset();
+    resultEl.textContent = "Netije şu ýerde görner...";
+    autoFillIp();
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+    const ipAddress = ipEl.value.trim();
+
+    if (!username || !password) {
+      resultEl.textContent = "Ýalňyş: E-poçta we açarsöz hökmany.";
+      return;
+    }
+
+    const payload = {
+      username,
+      password,
+      ipAddress: ipAddress || ""
+    };
+
+    resultEl.textContent = "Isleg iberilýär...";
+
+    try {
+      const resp = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Accept": "*/*",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const text = await resp.text();
+      let data;
+      try { data = JSON.parse(text); } catch { data = text; }
+
+      if (resp.ok && data?.data?.token) {
+      localStorage.setItem("token", data.data.token);
+      };
+
+
+      resultEl.textContent =
+        "HTTP: " + resp.status + "\n\n" +
+        (typeof data === "string" ? data : JSON.stringify(data, null, 2));
+
+    } catch (err) {
+      resultEl.textContent =
+        "Baglanyşyk ýalňşy: " + (err?.message || err) + "\n\n" +
+        "Eger bu CORS bolsa: faýly lokal server bilen işlediň (Live Server ýaly).";
+    }
+  });
+</script>
+
+</body>
+</html>

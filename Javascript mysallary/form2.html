@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="bikeForm">
+  <input type="text" id="title" placeholder="Title"><br><br>
+  <input type="text" id="description" placeholder="Description"><br><br>
+  <input type="text" id="customerNameSurname" placeholder="CustomerNameSurname"><br><br>
+  <input type="number" id="customerId" placeholder="Customer ID"><br><br>
+  <input type="tel" id="tel" placeholder="TelN0"><br><br>
+
+  <input type="number" id="categoryId" placeholder="Category ID"><br><br>
+  <input type="number" id="cityId" placeholder="City ID"><br><br>
+  <input type="number" id="districtId" placeholder="District ID"><br><br>
+
+  <input type="text" id="imageUrls" placeholder="Image URL (1)"><br><br>
+  <input type="number" id="price" placeholder="Price"><br><br>
+
+  <button type="submit">POST et</button>
+</form>
+
+<pre id="result"></pre>
+ <script>
+  document.getElementById("bikeForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const data = {
+    title: document.getElementById("title").value,
+    customerNameSurname: document.getElementById("customerNameSurname").value,
+    customerId: Number(document.getElementById("customerId").value),
+    telNo: document.getElementById("tel").value,
+    description: document.getElementById("description").value,
+    categoryId: Number(document.getElementById("categoryId").value),
+    cityId: Number(document.getElementById("cityId").value),
+    districtId: Number(document.getElementById("districtId").value),
+    imageUrls: [
+      document.getElementById("imageUrls").value
+    ],
+    price: Number(document.getElementById("price").value)
+  };
+
+  try {
+    const res = await fetch(
+      "https://rest.webigem.com.tr/api/v1/BicyclePublication",
+      {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + localStorage.getItem("token")
+},
+
+        body: JSON.stringify(data)
+      }
+    );
+
+    const json = await res.json();
+    document.getElementById("result").textContent =
+      JSON.stringify(json, null, 2);
+
+  } catch (err) {
+    console.error(err);
+  }
+});
+</script>
+
+</body>
+</html>
